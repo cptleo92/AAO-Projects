@@ -2,17 +2,28 @@ require_relative "./PolyTreeNode.rb"
 
 class KnightPathFinder  
 
-  attr_accessor :current_pos, :considered_pos
+  attr_accessor :start_pos, :considered_pos, :root_node
 
   def initialize(start_pos)
-    @current_pos = start_pos
-    @root_node = PolyTreeNode.new(@current_pos)      
+    @start_pos = start_pos
+    @root_node = PolyTreeNode.new(@start_pos)      
     @considered_pos = [start_pos]
-    build_move_tree    
+    build_move_tree      
   end
   
-  def build_move_tree
-    
+  def build_move_tree    
+    build_queue = [@root_node]
+    until build_queue.empty?
+      start = build_queue[0]
+
+      new_move_positions(start.value).each do |move| 
+        new_move = PolyTreeNode.new(move)
+        start.add_child(new_move)
+        build_queue << new_move
+      end
+      build_queue.shift   
+    end
+
   end
 
   def self.valid_moves(pos)
@@ -30,8 +41,30 @@ class KnightPathFinder
     valid_list
   end
 
+  def find_path(end_pos)
+    end_node = @root_node.dfs(end_pos)
+    trace_path_back(end_node)
+  end
+
+  def trace_path_back(end_node)
+    path = [end_node.value]
+    next_node = end_node.parent
+    while next_node
+      path.unshift(next_node.value)
+      next_node = next_node.parent
+    end
+    p path
+  end
 end
 
-k = KnightPathFinder.new([2,1])
-p k.new_move_positions(k.current_pos)
-p k.considered_pos
+kpf = KnightPathFinder.new([0, 0])
+kpf.find_path([7, 6]) # => [[0, 0], [1, 2], [2, 4], [3, 6], [5, 5], [7, 6]]
+kpf.find_path([6, 2]) # => [[0, 0], [1, 2], [2, 0], [4, 1], [6, 2]]
+
+# p k.root_node.children
+# k.root_node.children.each do |x|
+#     puts "i am " + x.value.to_s
+#     puts "my children are"
+#     p x.children
+#     puts "--------"
+# end
