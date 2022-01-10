@@ -1,5 +1,4 @@
-require_relative "piece.rb"
-require_relative "nullpiece.rb"
+require_relative "pieces.rb"
 require "colorize"
 require "byebug"
 
@@ -9,7 +8,7 @@ class Board
 
   def initialize
     @rows = Array.new(8) {Array.new(8) {[]} }
-    @null_piece = NullPiece
+    @null_piece = NullPiece.instance
 
     (0..7).each do |row|
       (0..7).each do |col|
@@ -32,6 +31,10 @@ class Board
   
   def []=(pos, val)
     rows[pos[0]][pos[1]] = val
+  end
+
+  def empty?(pos)
+    self[pos].empty?
   end
 
   def move_piece(start_pos, end_pos)
@@ -74,3 +77,5 @@ end
 # board.move_piece([6,3],[4,5])
 # board[[4,4]] = Piece.new
 # board.render
+
+# queen = Queen.new(:black, board, [3,4])

@@ -1,5 +1,5 @@
 require 'singleton'
-require_relative 'piece.rb'
+require_relative 'piece'
 
 class NullPiece < Piece
   attr_reader :symbol
