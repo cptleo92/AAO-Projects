@@ -78,4 +78,4 @@ end
 # board[[4,4]] = Piece.new
 # board.render
 
-# queen = Queen.new(:black, board, [3,4])
+# knight = Knight.new(:black, board, [3,4])

@@ -89,20 +89,22 @@ module Stepable
     moves = []
     x, y = self.pos
     move_diffs.each do |diff|
-    moves << [x + diff[0], y + diff[1]]
+      next_move = [x + diff[0], y + diff[1]]
+      next unless @board.valid_pos?(next_move)
+      moves << next_move if @board.empty?(next_move) || @board[next_move].color != self.color
     end
     moves
   end
 
   private
   def move_diffs
-    moves_knight_diffs = [[-2,-1],[-2,1],[-1,-2],[-1,2],[2,-1],[2,1],[-2,-1],[-2,1]]
+    moves_knight_diffs = [[-2,-1],[-2,1],[-1,-2],[-1,2],[2,-1],[2,1],[1,-2],[1,2]]
     moves_king_diffs = [
     [-1,-1],[-1,0],[-1,1],
     [0,1],[1,1],[1,0],
     [1,-1],[0,-1]
     ]
-    return move_knight_diffs if self.is_a?(Knight)
-    return move_king_diffs if self.is_a?(King)
+    return moves_knight_diffs if self.is_a?(Knight)
+    return moves_king_diffs if self.is_a?(King)
   end
 end
