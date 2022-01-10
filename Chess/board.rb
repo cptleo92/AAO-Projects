@@ -2,6 +2,10 @@ require_relative "pieces.rb"
 require "colorize"
 require "byebug"
 
+# TO DO
+# Need to test pieces more and movesets
+# Add pieces to board
+
 class Board
 
   attr_reader :rows
@@ -76,6 +80,12 @@ end
 # board = Board.new
 # board.move_piece([6,3],[4,5])
 # board[[4,4]] = Piece.new
-# board.render
 
-# knight = Knight.new(:black, board, [3,4])
+# board.move_piece([0,0],[4,4])
+# pawn1 = Pawn.new(:black, board, [2,4])
+# pawn2 = Pawn.new(:black, board, [3,4])
+# pawn3 = Pawn.new(:white, board, [4,5])
+# board.render
+# p pawn1.moves
+# p pawn2.moves
+# p pawn3.moves
