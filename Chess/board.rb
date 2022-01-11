@@ -85,35 +85,32 @@ class Board
     false
   end
 
-  def render
-    puts "  0 1 2 3 4 5 6 7".colorize(:green)
-    rows.each_with_index do |row, idx|
-      puts "#{idx.to_s.colorize(:green)} " + stringify(row)
+  def in_check?(color)
+    pos_king = find_king(color)
+    (0..7).each do |row|
+      (0..7).each do |col|
+        pos = [row,col]
+        if self[pos].color != color
+          return true if self[pos].moves.include?(pos_king)
+        end
+      end
+    end
+    false
+  end
+
+  def find_king(color)
+    (0..7).each do |row|
+      (0..7).each do |col|
+        return [row, col] if self[[row,col]].is_a?(King) && self[[row,col]].color == color
+      end
     end
   end
 
-  def stringify(row)
-    # byebug
-    str = ""
-    row.each do |space|
-      if space == @null_piece
-        str += "  "
-      else
-        str += "#{space.symbol} "
-      end   
-    end
-    str
-  end
+  # def checkmate?(color)
+  #   if in_check?(color)
+      
+  #   end
+  # end
 
 end
 
-board = Board.new
-board.render
-board.move_piece(:white, [1,1], [2,1])
-board.render
-board.move_piece(:white, [0,1], [2,2])
-board.render
-board.move_piece(:white, [0,2], [2,0])
-board.render
-board.move_piece(:white, [2,0], [6,4])
-board.render
