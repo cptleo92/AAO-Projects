@@ -2,7 +2,7 @@
 
 class Piece
   attr_accessor :pos
-  attr_reader :color, :board
+  attr_reader :color, :board, :symbol
 
   def initialize(color, board, pos)
     @color = color
@@ -22,13 +22,9 @@ class Piece
     moves
   end
 
-  def pos=(val)
-    @board[pos] = val
-  end
-
-  def symbol
-
-  end
+  # def pos=(val)
+  #   @board[pos] = val
+  # end
 
   private
   def move_into_check?(end_pos)

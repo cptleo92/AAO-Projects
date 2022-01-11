@@ -17,14 +17,38 @@ class Board
     (0..7).each do |row|
       (0..7).each do |col|
          if row.between?(2,5)
-            rows[row][col] = @null_piece
-         elsif row == 0 || row == 1
-            rows[row][col] = Piece.new(:black, @rows, [row,col])        
-         else 
-            rows[row][col] = Piece.new(:white, @rows, [row,col])   
+            rows[row][col] = @null_piece         
          end
       end
+    end
 
+    generate_pieces
+  end
+
+  def add_piece(piece, pos)
+    self[pos] = piece
+  end
+
+  def generate_pieces
+    add_piece(Rook.new(:white, self, [7,7]), [7,7])
+    add_piece(Rook.new(:white, self, [7,0]), [7,0])
+    add_piece(Rook.new(:black, self, [0,0]), [0,0])
+    add_piece(Rook.new(:black, self, [0,7]), [0,7])
+    add_piece(Knight.new(:white, self, [7,1]), [7,1])
+    add_piece(Knight.new(:white, self, [7,6]), [7,6])
+    add_piece(Knight.new(:black, self, [0,1]), [0,1])
+    add_piece(Knight.new(:black, self, [0,6]), [0,6])
+    add_piece(Bishop.new(:white, self, [7,2]), [7,2])
+    add_piece(Bishop.new(:white, self, [7,5]), [7,5])
+    add_piece(Bishop.new(:black, self, [0,2]), [0,2])
+    add_piece(Bishop.new(:black, self, [0,5]), [0,5])
+    add_piece(Queen.new(:white, self, [7,3]), [7,3])
+    add_piece(Queen.new(:black, self, [0,3]), [0,3])
+    add_piece(King.new(:white, self, [7,4]), [7,4])
+    add_piece(King.new(:black, self, [0,4]), [0,4])
+    (0..7).each do |num|
+      add_piece(Pawn.new(:white, self, [6, num]), [6,num])
+      add_piece(Pawn.new(:black, self, [1, num]), [1,num])
     end
 
   end
@@ -41,12 +65,18 @@ class Board
     self[pos].empty?
   end
 
-  def move_piece(start_pos, end_pos)
+  def move_piece(color, start_pos, end_pos)
+    moving = self[start_pos] 
+    #error message if trying to pick wrong color
     raise "Start position is not valid!" unless valid_pos?(start_pos)
-    raise "There is no piece at the start!" if self[start_pos] == @null_piece
+    raise "There is no piece at the start!" if moving == @null_piece
     raise "End position is not valid!" unless valid_pos?(end_pos)
-    self[end_pos] = self[start_pos]
-    self[start_pos] = @null_piece   
+    
+    move_list = moving.valid_moves
+    raise "Move is illegal" unless move_list.include?(end_pos)
+    self[end_pos] = moving
+    moving.pos = end_pos    
+    self[start_pos] = @null_piece
   end
 
   def valid_pos?(pos)
@@ -69,7 +99,7 @@ class Board
       if space == @null_piece
         str += "  "
       else
-        str += "P " 
+        str += "#{space.symbol} "
       end   
     end
     str
@@ -77,15 +107,13 @@ class Board
 
 end
 
-# board = Board.new
-# board.move_piece([6,3],[4,5])
-# board[[4,4]] = Piece.new
-
-# board.move_piece([0,0],[4,4])
-# pawn1 = Pawn.new(:black, board, [2,4])
-# pawn2 = Pawn.new(:black, board, [3,4])
-# pawn3 = Pawn.new(:white, board, [4,5])
-# board.render
-# p pawn1.moves
-# p pawn2.moves
-# p pawn3.moves
+board = Board.new
+board.render
+board.move_piece(:white, [1,1], [2,1])
+board.render
+board.move_piece(:white, [0,1], [2,2])
+board.render
+board.move_piece(:white, [0,2], [2,0])
+board.render
+board.move_piece(:white, [2,0], [6,4])
+board.render
