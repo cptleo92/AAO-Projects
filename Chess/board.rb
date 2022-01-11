@@ -8,7 +8,7 @@ require "byebug"
 
 class Board
 
-  attr_reader :rows
+  attr_accessor :rows
 
   def initialize
     @rows = Array.new(8) {Array.new(8) {[]} }
@@ -112,5 +112,24 @@ class Board
   #   end
   # end
 
+  def dup
+    new_board = []
+    @rows.each do |row|
+      new_row = []
+      (0..7).each do |col|
+       if row[col].is_a?(NullPiece)        
+        new_row << NullPiece.instance 
+        next
+       end
+        new_row << row[col].dup 
+      end
+      new_board << new_row
+    end
+    b2 = Board.new
+    b2.rows = new_board
+    b2
+  end
+
 end
+
 

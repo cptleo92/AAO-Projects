@@ -26,7 +26,7 @@ class Pawn < Piece
   end
 
   def forward_steps        
-    # byebug
+    byebug
     x, y = self.pos
     moves = [[x + forward_dir, y]]
     moves << [x + forward_dir * 2, y] if at_start_row? && @board.empty?([x + forward_dir, y])

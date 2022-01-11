@@ -1,8 +1,8 @@
 # require_relative "board.rb"
 
 class Piece
-  attr_accessor :pos
-  attr_reader :color, :board, :symbol
+  attr_accessor :pos, :board
+  attr_reader :color, :symbol
 
   def initialize(color, board, pos)
     @color = color
@@ -19,7 +19,7 @@ class Piece
   end
 
   def valid_moves
-    moves
+    moves.reject {|move| move_into_check?(move)}
   end
 
   # def pos=(val)
@@ -28,7 +28,21 @@ class Piece
 
   private
   def move_into_check?(end_pos)
+    
+    old_board = @board
+    new_board = @board.dup
+    self.board = new_board
+    new_board[end_pos] = self
+    new_board[self.pos] = NullPiece.instance
+    pos_king = new_board.find_king(@color)
 
+    if new_board.in_check?(@color)           
+      self.board = old_board
+      return true
+    end    
+    
+    self.board = old_board
+    false
   end
 
 end
