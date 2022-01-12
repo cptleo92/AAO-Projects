@@ -4,7 +4,7 @@ require_relative "deck.rb"
 class Hand 
 
   VALUES = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"] 
-
+ 
   attr_reader :deck
   attr_accessor :cards, :score  
 
@@ -15,13 +15,19 @@ class Hand
 
   def discard(num)
     raise "too many discards!" if num.length > 5
-    raise "invalid space!" unless num.all? { |x| x.between?(1,5)}
+    raise "invalid space!" unless num.all? { |x| x.between?(0,5)}
     return if num == [0]
     num.map! { |x| x-1 }
     @cards.reject! do |card|
        idx = @cards.index(card)
        num.include?(idx)
     end    
+  end
+
+  def render    
+    str = ""
+    @cards.each { |card| str += card.value + card.suit.to_s + " " }
+    puts str
   end
 
   def length
