@@ -13,7 +13,7 @@ describe Deck do
 
   describe "#shuffle!" do
     it "shuffles the deck" do
-      original = deck.cards
+      original = deck.cards.dup
       deck.shuffle!  
       expect(deck.cards).to_not eq(original)      
     end
@@ -25,8 +25,8 @@ describe Deck do
       expect(deck.cards.length).to eq(51)
     end
 
-    it "returns a card" 
-    
+    # it "returns a card" 
+
   end
 
 end

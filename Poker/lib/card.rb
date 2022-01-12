@@ -1,7 +1,7 @@
 class Card 
 
   SUITS = [:S, :D, :C, :H]
-  VALUES = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
+  VALUES = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
 
   attr_reader :value, :suit, :score
 
@@ -16,7 +16,7 @@ class Card
 #   end
 
   def get_score    
-    if VALUES[0..9].include?(value)
+    if VALUES[0..8].include?(value)
         return value.to_i
     elsif value == "J"
         return 11
