@@ -27,6 +27,10 @@ describe Game do
     it "keeps track of the pot" do
       expect(game.pot).to be(Integer)
     end
+
+    it "keeps track of current bet" do
+      expect(game.bet).to be(Integer)
+    end
   end 
  
   describe "#switch_turn" do
