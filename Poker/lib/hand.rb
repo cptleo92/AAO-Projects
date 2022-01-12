@@ -16,11 +16,20 @@ class Hand
   def discard(num)
     raise "too many discards!" if num.length > 5
     raise "invalid space!" unless num.all? { |x| x.between?(1,5)}
+    return if num == [0]
     num.map! { |x| x-1 }
     @cards.reject! do |card|
        idx = @cards.index(card)
        num.include?(idx)
     end    
+  end
+
+  def length
+    @cards.length
+  end
+
+  def <<(item)
+    @cards << item
   end
 
   def draw

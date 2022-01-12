@@ -15,6 +15,10 @@ class Card
     
 #   end
 
+  def inspect
+   {'value' => @value, 'suit' => @suit }.inspect
+  end
+
   def get_score    
     if VALUES[0..8].include?(value)
         return value.to_i

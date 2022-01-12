@@ -10,7 +10,17 @@ VALUES = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
   def initialize
     @cards = []
     generate_deck
+    shuffle!
+    shuffle!
   end  
+ 
+  def inspect
+    self.length.inspect
+  end
+
+  def length
+    @cards.length
+  end
 
   def shuffle!
     @cards.shuffle!
