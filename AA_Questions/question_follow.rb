@@ -16,7 +16,7 @@ class QuestionFollow
   end
 
   def self.find_by_id(id)
-    QuestionsDatabase.instance.execute(<<-SQL, id)
+    data = QuestionsDatabase.instance.execute(<<-SQL, id)
       SELECT 
         *
       FROM 
@@ -24,6 +24,7 @@ class QuestionFollow
       WHERE 
         id = ?
     SQL
+    (data.map { |datum| QuestionFollow.new(datum) })[0]
   end
 
 end

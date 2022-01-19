@@ -1,4 +1,6 @@
 require_relative 'AA_Questions'
+require_relative 'question'
+require_relative 'reply'
 require 'sqlite3'
 
 class User
@@ -16,7 +18,7 @@ class User
   end
 
   def self.find_by_id(id)
-    QuestionsDatabase.instance.execute(<<-SQL, id)
+    data = QuestionsDatabase.instance.execute(<<-SQL, id)
       SELECT 
         *
       FROM 
@@ -24,6 +26,26 @@ class User
       WHERE 
         id = ?
     SQL
+    (data.map { |datum| User.new(datum) })[0]
   end
 
+  def self.find_by_name(fname, lname)
+    data = QuestionsDatabase.instance.execute(<<-SQL, fname, lname)
+      SELECT
+        *
+      FROM
+        users
+      WHERE
+        fname = ? AND lname = ?
+    SQL
+    (data.map { |datum| User.new(datum) })[0]
+  end
+
+  def authored_questions
+    Question.find_by_author_id(@id)
+  end
+
+  def authored_replies
+    Reply.find_by_user_id(@id)
+  end
 end

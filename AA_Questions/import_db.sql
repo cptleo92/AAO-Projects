@@ -38,14 +38,14 @@ CREATE TABLE question_follows (
 
 CREATE TABLE replies (
   id INTEGER PRIMARY KEY,
-  subject_id INTEGER NOT NULL,
+  question_id INTEGER NOT NULL,
   parent_id INTEGER,
-  op_id INTEGER NOT NULL,
+  user_id INTEGER NOT NULL,
   body NOT NULL,
 
-  FOREIGN KEY (subject_id) REFERENCES questions(id),
+  FOREIGN KEY (question_id) REFERENCES questions(id),
   FOREIGN KEY (parent_id) REFERENCES replies(id),
-  FOREIGN KEY (op_id) REFERENCES users(id)
+  FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 
@@ -89,19 +89,24 @@ VALUES
   ((SELECT id FROM users WHERE fname = 'Cat'), (SELECT id FROM questions WHERE title = 'I am the greatest person in history'));
 
 INSERT INTO
-  replies (subject_id, op_id, body)
+  replies (question_id, user_id, body)
 VALUES
   ((SELECT id FROM questions WHERE title = 'I am the greatest person in history'), (SELECT id FROM users WHERE fname = 'Leo'), 'uhh what?'), 
   ((SELECT id FROM questions WHERE title = 'Bowling?'), (SELECT id FROM users WHERE fname = 'John'), 'anyone?');
 
 INSERT INTO
-  replies (subject_id, op_id, body, parent_id)
+  replies (question_id, user_id, body, parent_id)
 VALUEs
   ((SELECT id FROM questions WHERE title = 'I am the greatest person in history'), (SELECT id FROM users WHERE fname = 'Kendall'), 'You heard me', (SELECT id FROM replies WHERE body = 'uhh what?')),
-  ((SELECT id FROM questions WHERE title = 'I am the greatest person in history'), (SELECT id FROM users WHERE fname = 'Cat'), 'PLEASE HELP!!', (SELECT id FROM replies WHERE body = 'uhh what?'));
+  ((SELECT id FROM questions WHERE title = 'I am the greatest person in history'), (SELECT id FROM users WHERE fname = 'Cat'), 'PLEASE HELP!!', (SELECT id FROM replies WHERE body = 'uhh what?')),
+  ((SELECT id FROM questions WHERE title = 'Bowling?'), (SELECT id FROM users WHERE fname = 'Cat'), 'ME!', (SELECT id FROM replies WHERE body = 'anyone?')),
+  ((SELECT id FROM questions WHERE title = 'Bowling?'), (SELECT id FROM users WHERE fname = 'Kendall'), 'I''m about to rock your world', (SELECT id FROM replies WHERE body = 'anyone?')),
+  ((SELECT id FROM questions WHERE title = 'Bowling?'), (SELECT id FROM users WHERE fname = 'John'), ':D :D :D', 5);
 
 INSERT INTO
   question_likes (user_id, question_id)
 VALUES 
   ((SELECT id FROM users WHERE fname = 'Leo'), (SELECT id FROM questions WHERE title = 'Bowling?')),
+  ((SELECT id FROM users WHERE fname = 'Cat'), (SELECT id FROM questions WHERE title = 'Bowling?')),
+  ((SELECT id FROM users WHERE fname = 'Kendall'), (SELECT id FROM questions WHERE title = 'Bowling?')),
   ((SELECT id FROM users WHERE fname = 'Kendall'), (SELECT id FROM questions WHERE title = 'I am the greatest person in history'));

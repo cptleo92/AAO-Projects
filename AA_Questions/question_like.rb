@@ -18,7 +18,7 @@ class QuestionLike
   end
 
   def self.find_by_id(id)
-    QuestionsDatabase.instance.execute(<<-SQL, id)
+    data = QuestionsDatabase.instance.execute(<<-SQL, id)
       SELECT 
         *
       FROM 
@@ -26,6 +26,7 @@ class QuestionLike
       WHERE 
         id = ?
     SQL
+    (data.map { |datum| QuestionLike.new(datum) })[0]
   end
 
 end
