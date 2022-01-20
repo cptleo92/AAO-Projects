@@ -66,6 +66,7 @@ VALUES
   ('Leo', 'Cheng'),
   ('John', 'Smorg'),
   ('Cat', 'Choi'),
+  ('Quiet', 'Guy'),
   ('Kendall', 'Roy');
 
 INSERT INTO
@@ -74,7 +75,9 @@ VALUES
   ('Help!', 'I can''t seem to fix my chess methods. Any ideas?', (SELECT id FROM users WHERE fname = 'Leo')),
   ('Bowling?', 'Anybody want to hit the lanes next weekend?', (SELECT id FROM users WHERE fname = 'John')),
   ('HOW TO INITIALIZE', 'PLEASE HELP I NEED HELP TO INITLIAZE PROJECT DUE TMRW I AM STRUGGLING', (SELECT id FROM users WHERE fname = 'Cat')),
+  ('I FIXED IT', 'THANKS', (SELECT id FROM users WHERE fname = 'Cat')),
   ('I am the greatest person in history', 'This is fact.', (SELECT id FROM users WHERE fname = 'Kendall')),
+  ('How to stop feeling lonely', 'Can you guys come to my party?', (SELECT id FROM users WHERE fname = 'Kendall')),
   ('Help!!', 'I have no idea how to do this', (SELECT id FROM users WHERE fname = 'Leo'));
 
 INSERT INTO
@@ -107,6 +110,13 @@ INSERT INTO
   question_likes (user_id, question_id)
 VALUES 
   ((SELECT id FROM users WHERE fname = 'Leo'), (SELECT id FROM questions WHERE title = 'Bowling?')),
+  ((SELECT id FROM users WHERE fname = 'Leo'), (SELECT id FROM questions WHERE title = 'HOW TO INITIALIZE')),
   ((SELECT id FROM users WHERE fname = 'Cat'), (SELECT id FROM questions WHERE title = 'Bowling?')),
+  ((SELECT id FROM users WHERE fname = 'Cat'), (SELECT id FROM questions WHERE title = 'Help!')),
+  ((SELECT id FROM users WHERE fname = 'Kendall'), (SELECT id FROM questions WHERE title = 'Help!')),
   ((SELECT id FROM users WHERE fname = 'Kendall'), (SELECT id FROM questions WHERE title = 'Bowling?')),
+  ((SELECT id FROM users WHERE fname = 'Quiet'), (SELECT id FROM questions WHERE title = 'Bowling?')),
+  ((SELECT id FROM users WHERE fname = 'Kendall'), (SELECT id FROM questions WHERE title = 'I FIXED IT')),
+  ((SELECT id FROM users WHERE fname = 'John'), (SELECT id FROM questions WHERE title = 'I am the greatest person in history')),
+  ((SELECT id FROM users WHERE fname = 'Quiet'), (SELECT id FROM questions WHERE title = 'I am the greatest person in history')),
   ((SELECT id FROM users WHERE fname = 'Kendall'), (SELECT id FROM questions WHERE title = 'I am the greatest person in history'));
