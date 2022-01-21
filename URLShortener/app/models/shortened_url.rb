@@ -18,6 +18,15 @@ class ShortenedUrl < ApplicationRecord
     short.save!   
   end
 
+  def self.prune(n)
+    stale = ShortenedUrl
+              .where('created_at < ?', n.minutes.ago)           
+              .select { |url| url.num_clicks == 0 }
+    stale.each do |url|
+      url.destroy unless url.submitter.premium
+    end
+  end
+
   def num_clicks
     recorded_visits.count
   end
@@ -50,7 +59,8 @@ class ShortenedUrl < ApplicationRecord
   has_many :recorded_visits,
     class_name: 'Visit',
     foreign_key: :url_id,
-    primary_key: :id
+    primary_key: :id,
+    dependent: :destroy
 
   has_many :visitors, 
     -> { distinct },
@@ -60,7 +70,8 @@ class ShortenedUrl < ApplicationRecord
   has_many :taggings,
     class_name: 'Tagging',
     foreign_key: :url_id,
-    primary_key: :id
+    primary_key: :id,
+    dependent: :destroy
 
   has_many :tags, through: :taggings, source: :tag
 
