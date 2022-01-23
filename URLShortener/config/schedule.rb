@@ -19,6 +19,9 @@
 
 # Learn more: http://github.com/javan/whenever
 
+set :output, "log/cron_log.log"
+env :PATH, ENV['PATH']
+
 every 5.minutes do
   rake 'myprune:prune_old_urls'
 end
