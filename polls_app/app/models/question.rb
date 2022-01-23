@@ -1,5 +1,5 @@
 class Question < ApplicationRecord
-  validates: :text, presence: true, uniqueness: true
+  validates :text, presence: true, uniqueness: true
 
   belongs_to :poll,
     class_name: 'Poll',
