@@ -8,7 +8,9 @@ class Artwork < ApplicationRecord
     foreign_key: :artist_id
 
   has_many :comments,
-    dependent: :destroy
+    dependent: :destroy  
+
+  has_many :likes, as: :likeable
 
   has_many :artwork_shares
     

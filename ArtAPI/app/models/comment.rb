@@ -5,5 +5,7 @@ class Comment < ApplicationRecord
     class_name: 'User',
     foreign_key: :user_id
 
+  has_many :likes, as: :likeable
+
   belongs_to :artwork
 end

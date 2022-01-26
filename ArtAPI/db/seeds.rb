@@ -31,3 +31,11 @@ Comment.create!(user_id: '3', artwork_id: '2', body: 'too scary')
 Comment.create!(user_id: '3', artwork_id: '4', body: 'why?')
 Comment.create!(user_id: '3', artwork_id: '3', body: 'first')
 
+
+Like.create!(user_id: '1', likeable_id: '4', likeable_type: 'Artwork')
+Like.create!(user_id: '1', likeable_id: '3', likeable_type: 'Comment')
+Like.create!(user_id: '2', likeable_id: '4', likeable_type: 'Comment')
+Like.create!(user_id: '2', likeable_id: '2', likeable_type: 'Artwork')
+Like.create!(user_id: '2', likeable_id: '6', likeable_type: 'Artwork')
+
+
