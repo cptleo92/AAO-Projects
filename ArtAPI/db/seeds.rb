@@ -23,3 +23,11 @@ ArtworkShare.create!(viewer_id: 2, artwork_id: 1)
 ArtworkShare.create!(viewer_id: 3, artwork_id: 1)
 ArtworkShare.create!(viewer_id: 1, artwork_id: 5)
 ArtworkShare.create!(viewer_id: 1, artwork_id: 6)
+
+Comment.create!(user_id: '1', artwork_id: '1', body: 'Please let me know what you think!')
+Comment.create!(user_id: '1', artwork_id: '5', body: 'Love it!')
+Comment.create!(user_id: '1', artwork_id: '4', body: 'Makes me hungry lol')
+Comment.create!(user_id: '3', artwork_id: '2', body: 'too scary')
+Comment.create!(user_id: '3', artwork_id: '4', body: 'why?')
+Comment.create!(user_id: '3', artwork_id: '3', body: 'first')
+
