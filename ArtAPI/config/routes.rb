@@ -5,14 +5,23 @@ Rails.application.routes.draw do
   resources :users do
     resources :artworks, only: :index
     resources :comments, only: :index
+    get 'favorite', on: :member
   end
 
   resources :artworks, only: [:show, :update, :destroy, :create] 
   resources :artworks do
     resources :comments, only: :index
+    # get 'favorite', on: :member
+    # post 'favorite', on: :member
+    # delete 'favorite', on: :member
   end
 
-  resources :artwork_shares, only: [:destroy, :create]   
+  resources :artwork_shares, only: [:destroy, :create]  
+  # resources :artwork_shares do
+    # get 'favorite', on: :member
+    # post 'favorite', on: :member
+    # delete 'favorite', on: :member
+  # end
 
   resources :comments, only: [:create, :destroy]
 

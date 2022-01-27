@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     render json: user
   end
 
-  def update
+  def updateq
     user = User.find(params[:id])
     if user.update_attributes(user_params)
       render json: user
@@ -36,6 +36,13 @@ class UsersController < ApplicationController
     user.destroy
     render json: user  
   end
+
+  def favorite
+    id = params[:id]
+    favs = Artwork.where('favorite = true AND artist_id = ?', id)
+    fav_shares = ArtworkShare.where('favorite = true AND viewer_id = ?', id)
+    render json: (favs + fav_shares)
+  end  
 
   private
   def user_params
