@@ -1,0 +1,63 @@
+<% if action == :edit %>
+  <% action_url = cat_url(cat) %>
+<% else %>
+  <% action_url = cats_url %>
+<% end %>
+
+<form action="<%= action_url %>" method="post">
+  <% if action == :edit %>
+  <input type="hidden" name="_method" value="patch">
+  <% end %>
+
+  <label for="name">Name: </label>
+  <input id="name" type="text" name="cat[name]" value="<%= cat.name %>">
+
+  <br>
+  <br>
+
+  <p>Sex:</p>
+  <input id="m" type="radio" name="cat[sex]" value="M" 
+    <%= cat.sex == "M" ? "checked" : "" %> >
+  <label for="m">Male</label>
+  <input id="f" type="radio" name="cat[sex]" value="F"
+    <%= cat.sex == "F" ? "checked" : "" %> >
+  <label for="f">Female</label>
+
+  <br>
+  <br>
+
+  <label for="color">Color: </label>
+  <select id = "color" name="cat[color]">
+    <option disabled>--Please select--</option>
+    <option value="Black" <%= cat.color == "Black" ? "selected" : "" %>>Black</option>
+    <option value="Chocolate" <%= cat.color == "Chocolate" ? "selected" : "" %>>Chocolate</option>
+    <option value="Cinnamon" <%= cat.color == "Cinnamon" ? "selected" : "" %>>Cinnamon</option>
+    <option value="Blue" <%= cat.color == "Blue" ? "selected" : "" %>>Blue</option>
+    <option value="Lilac" <%= cat.color == "Lilac" ? "selected" : "" %>>Lilac</option>
+    <option value="Cream" <%= cat.color == "Cream" ? "selected" : "" %>>Cream</option>
+    <option value="Caramel" <%= cat.color == "Caramel" ? "selected" : "" %>>Caramel</option>
+  </select>
+
+  <br>
+  <br>
+
+  <label for="birth_date">Birth Date: </label>
+  <input id="birth_date" type="date" name="cat[birth_date]" value="<%= cat.birth_date %>"
+        min="2000-01-01" max="<%= Date.today %>">
+
+  <br>
+  <br>
+
+  <label for="description">Description: </label><br>
+  <textarea name="cat[description]" id="description"><%= cat.description %></textarea>
+
+  <br>
+  <br>
+
+  <% if action == :edit %>
+  <input type="submit" value="Update cat!">
+  <% else %>
+  <input type="submit" value="Add cat!">
+  <% end %>
+  
+</form>

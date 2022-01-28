@@ -3,7 +3,7 @@ require 'action_view'
 class Cat < ApplicationRecord
   include ActionView::Helpers::DateHelper
   
-  COLORS = ["black", "white", "brown", "yellow"]
+  COLORS = %w(Black Chocolate Cinnamon Blue Lilac Cream Caramel)
 
   validates :name, :color, :birth_date, :sex, :description, presence: true
   validates :color, inclusion: { in: COLORS, 

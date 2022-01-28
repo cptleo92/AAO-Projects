@@ -1,0 +1,7 @@
+<h1>Edit a cat!</h1>
+
+<%= render 'form', action: :edit, cat: @cat %>
+
+<br>
+<a href="<%= cat_url(@cat)%>">Back</a><br>
+<a href="<%= cats_url %>">Back to Index</a>
