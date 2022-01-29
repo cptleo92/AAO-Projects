@@ -14,5 +14,24 @@
   </tbody>
 </table>
 
+<% reqs = CatRentalRequest.where(cat_id: @cat.id).order(:start_date) %>
+
+<br>
+<% if reqs.exists? %>
+<table>
+  <thead>
+    <tr>
+      <th colspan="2">Rental Requests</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><th>Dates requested</th><th>Approved?</th></tr>
+    <% reqs.each do |cat| %>
+    <tr><td><%= cat.start_date %> to <%= cat.end_date %></td><td><%= cat.status %></td></tr>
+    <% end %>
+  </tbody>
+<% end %>
+</table>
+
 <%= render "shared/footer", cat: @cat %>
 

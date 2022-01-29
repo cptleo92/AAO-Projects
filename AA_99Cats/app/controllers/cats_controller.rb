@@ -25,7 +25,7 @@ class CatsController < ApplicationController
     if @cat.save
       redirect_to cat_url(@cat)
     else
-      redirect_to new_url
+      redirect_to new_cat_url
     end
   end
 

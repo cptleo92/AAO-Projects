@@ -10,6 +10,10 @@ class Cat < ApplicationRecord
     message: "invalid color"}
   validates :sex, inclusion: { in: ['M', 'F'] }
 
+  has_many :rental_requests,
+    class_name: 'CatRentalRequest',
+    dependent: :destroy
+
   def age
     time_ago_in_words(self.birth_date)
   end 
