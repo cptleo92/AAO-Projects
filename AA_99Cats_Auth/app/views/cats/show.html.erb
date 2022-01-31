@@ -11,6 +11,10 @@
       <td><%= @cat.send(attr_name) %></td>
     </tr>
   <% end %>
+    <tr>
+      <td>owner</td>
+      <td><%= @cat.owner.user_name %></td>
+    </tr>
 </table>
 
 <a href="<%= edit_cat_url(@cat) %>">Edit <%= @cat.name %></a>
@@ -21,8 +25,14 @@
     <th>Start Date</th>
     <th>End Date</th>
     <th>Status</th>
+    <th>Requester</th>
   </tr>
-  <% @cat.rental_requests.order('start_date').each do |req| %>
-    <%= render 'req_tr', req: req %>
+  <% @cat.rental_requests.order('start_date').each do |req| %>    
+      <%= render 'req_tr', req: req, cat: @cat %>    
   <% end %>
 </table>
+
+
+<br>
+<a href="<%= cats_url %>">Back to index</a>
+

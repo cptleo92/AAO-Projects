@@ -9,6 +9,10 @@ class CatRentalRequest < ApplicationRecord
 
   belongs_to :cat
 
+  belongs_to :requester,
+    class_name: 'User',
+    foreign_key: :user_id
+
   after_initialize :assign_pending_status
 
   def approve!
@@ -123,7 +127,7 @@ class CatRentalRequest < ApplicationRecord
       .where.not(id: self.id)
       .where(cat_id: cat_id)
       .where.not('start_date > :end_date OR end_date < :start_date',
-                 start_date: start_date, end_date: end_date)
+                start_date: start_date, end_date: end_date)
   end
 
   def overlapping_approved_requests

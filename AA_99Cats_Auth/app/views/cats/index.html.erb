@@ -6,10 +6,11 @@
   <% end %>
 </ul>
 
-<a href="<%= new_cat_url %>">Create cat</a>
-
 <% if current_user.nil? %>
-<a href="<%= new_session_url %>">Log in</a>
-<a href="<%= new_user_url %>">Register</a>
+  <a href="<%= new_session_url %>">Log in</a>
+  <a href="<%= new_user_url %>">Register</a>
+<% else %>
+  <a href="<%= new_cat_url %>">Create cat!</a>
+  <a href="<%= new_cat_rental_request_url %>">Rent a cat!</a>
 <% end %>
 
