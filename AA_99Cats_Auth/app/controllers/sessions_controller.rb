@@ -8,7 +8,8 @@ class SessionsController < ApplicationController
   def create    
     user = User.find_by_credentials(params[:user][:user_name], params[:user][:password])
     if user.nil?
-      render json: 'Wrong login'
+      flash.now[:errors] = "Wrong login info"
+      render :new
     else
       # session[:session_token] = user.reset_session_token!
       # redirect_to cats_url

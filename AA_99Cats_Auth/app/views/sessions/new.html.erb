@@ -16,6 +16,12 @@
 
   <br />
 
+  <% if flash[:errors] %>
+    <br>
+      <p><%= flash[:errors] %></p>
+    <br>
+  <% end %>
+
   <input type="submit" value="Log in!">
 </form>
 

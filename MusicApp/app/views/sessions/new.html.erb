@@ -1,0 +1,7 @@
+<h1>Log in to your account!</h1>
+
+<% if flash[:errors] %>
+    <ul><li><%= flash[:errors] %></li> </ul>
+<% end %>
+
+<%= render "shared/emailandpw", action: "login" %>
