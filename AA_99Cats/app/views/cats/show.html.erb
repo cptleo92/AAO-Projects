@@ -21,14 +21,33 @@
 <table>
   <thead>
     <tr>
-      <th colspan="2">Rental Requests</th>
+      <th colspan="3">Rental Requests</th>
     </tr>
   </thead>
   <tbody>
-    <tr><th>Dates requested</th><th>Approved?</th></tr>
-    <% reqs.each do |cat| %>
-    <tr><td><%= cat.start_date %> to <%= cat.end_date %></td><td><%= cat.status %></td></tr>
+    <tr>
+      <th>Dates requested</th>
+      <th>Status?</th>
+      <th>Approve or Deny</th>
+    </tr>  
+    <tr>
+      <% reqs.each do |cat| %>
+      <td><%= cat.start_date %> to <%= cat.end_date %></td>
+      <td><%= cat.status %></td>     
+      <% if cat.pending? %>
+      <td>
+        <form action="<%= approve_cat_rental_request_url(cat.id) %>" method="post">
+          <input type="submit" value="Approve">
+        </form>
+        <form action="<%= deny_cat_rental_request_url(cat.id) %>" method="post">
+          <input type="submit" value="Deny">
+        </form>
+      </td>
+      <% end %>
+    </tr>
+    
     <% end %>
+  
   </tbody>
 <% end %>
 </table>
