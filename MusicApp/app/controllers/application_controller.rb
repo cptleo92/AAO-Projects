@@ -9,6 +9,12 @@ class ApplicationController < ActionController::Base
   def logged_in?
     session[:session_token] != nil
   end
+  
+  def require_logged_in!
+    unless logged_in?
+      redirect_to bands_url
+    end
+  end
 
   def login!(user)
     @current_user = user

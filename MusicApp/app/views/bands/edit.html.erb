@@ -1,0 +1,14 @@
+<h1><%= @band.name %></h1>
+
+<form action="<%= band_url(@band) %>" method="post">
+  <%= auth_token %>
+  <input type="hidden" name="_method" value="patch">
+
+  <label for="change_name">Change Name</label>
+  <input type="text" id="change_name" name="bands[name]">
+
+  <br>
+  <input type="submit" value="Update">
+</form>
+
+<%= button_to "Delete", band_url(@band), method: :delete %>

@@ -1,0 +1,39 @@
+<% action_url = (action == "add") ? albums_url : album_url(album.id) %>
+<% button = (action == "add") ? "Add" : "Update" %>
+
+<%= render "shared/errors" %>
+
+<form action="<%= action_url %>" method="post">
+  <%= auth_token %>
+
+  <% if action == "edit" %>
+  <input type="hidden" name="_method" value="patch">
+  <% end %>
+
+  <label for="band">Band/Artist</label>  
+  <select id="band" name="albums[band_id]">  
+  <% unless @bands.nil? %>
+    <% @bands.each do |band| %>
+      <option value="<%= band.id %>"><%= band.name %></option>
+    <% end %>
+  </select>
+  <% end %>
+  <br>
+  <label for="title">Title</label>
+  <input type="text" id="title" name="albums[title]" value="<%= album.title %>">
+  <br>
+  <label for="year">Year</label>
+  <input type="number" id="year" name="albums[year]" value="<%= album.year %>">
+  <br>
+  <p>Is this a studio album or live album?</p>
+  <label for="studio">Studio</label>
+  <input type="radio" id="studio" name="albums[studio]" value="t" <%= album.studio ? "checked" : "" %>>
+  <label for="live">Live</label>
+  <input type="radio" id="live" name="albums[studio]" value="f" <%= album.studio ? "" : "checked" %>>
+  <br>
+  <input type="submit" value="<%= button %>">
+</form>
+
+<% if action == "edit" %>
+  <%= button_to "Delete Album", album_url(album.id), method: :delete %>
+<% end %>

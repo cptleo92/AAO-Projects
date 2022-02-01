@@ -10,18 +10,18 @@
   </head>
 
   <header>
+    <%= link_to 'Home', bands_url %>
     <% if current_user %>
-      <%= button_to 'Logout', sessions_url, method: :delete %>
-    <% end %>
-  </header>
-
-  <body>
-    <%= yield %>
-
-    <% unless logged_in? %>
+      <%= link_to 'Logout', sessions_url, method: :delete %>
+    <% else %>
       <%= link_to 'Log In', new_sessions_url %>
       <%= link_to 'Sign Up', new_user_url %>
     <% end %>
+  
+  </header>
+
+  <body>
+    <%= yield %>  
   
   </body>
 </html>
