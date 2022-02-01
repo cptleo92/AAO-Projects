@@ -1,0 +1,22 @@
+<% if track.notes.empty? %>
+  <p>No notes... yet!</p>
+<% else %>
+  <table>
+    <thead>
+      <tr>
+        <th colspan="2">Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% track.notes.each do |note| %>
+        <tr>
+          <td><%= note.user.email %></td>
+          <td><%= note.text %></td>          
+          <% if current_user == note.user %>
+            <td><%= link_to "Delete", note_url(note), method: :delete %></td>
+          <% end %>
+        </tr>      
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

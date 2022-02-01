@@ -7,4 +7,6 @@ class Track < ApplicationRecord
   belongs_to :album
   belongs_to :band
 
+  has_many :notes, dependent: :destroy
+
 end

@@ -19,6 +19,11 @@
     </tr>
   </tbody>
 </table>
+<br>
+<%= render "notes/note", track: @track %>
+<br>
+<%= render "notes/form", track: @track %>
+<br>
 
 <p style="white-space: pre-wrap;"><%= @track.lyrics %></p>
 <br>
