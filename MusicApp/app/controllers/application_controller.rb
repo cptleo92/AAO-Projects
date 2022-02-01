@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   
   def require_logged_in!
     unless logged_in?
-      redirect_to bands_url
+      redirect_to new_sessions_url
     end
   end
 

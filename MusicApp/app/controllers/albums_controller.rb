@@ -1,4 +1,6 @@
 class AlbumsController < ApplicationController
+  before_action :require_logged_in!, except: :show
+  
   def show
     @album = Album.find_by(id: params[:id])
     render :show
@@ -6,7 +8,7 @@ class AlbumsController < ApplicationController
 
   def new    
     @bands = Band.all
-    @album = Album.new
+    @album = Album.new(band_id: params[:band_id])
     render :new
   end
 

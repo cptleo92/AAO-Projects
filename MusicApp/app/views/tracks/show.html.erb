@@ -1,0 +1,29 @@
+<table>
+  <thead>
+    <tr>
+      <th colspan="2"><%= @track.title %>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Band</td>
+      <td><%= @track.band.name %></td>
+    </tr>
+    <tr>
+      <td>Album</td>
+      <td><%= @track.album.title %></td>
+    </tr>  
+    <tr>
+      <td>Regular/Bonus</td>
+      <td><%= @track.bonus ? "Bonus" : "Regular" %></td>
+    </tr>
+  </tbody>
+</table>
+
+<p style="white-space: pre-wrap;"><%= @track.lyrics %></p>
+<br>
+<%= link_to "Edit", edit_track_url %>
+<br>
+<%= link_to "Back to album", album_url(@track.album) %>
+<br>
+<%= link_to "Back to artist", band_url(@track.band) %>

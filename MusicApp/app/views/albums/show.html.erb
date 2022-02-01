@@ -20,7 +20,23 @@
     </tr>
   </tbody>
 </table>
+
+
+
+<% if @album.tracks.empty? %>
+  <p>No tracks... yet!</p>
+<% else %>
+  <p>Tracks</p>
+  <ul>
+    <% @album.tracks.each do |track|%>
+      <li><%= link_to "#{track.title}", track_url(track) %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <br>
 <%= link_to "Edit", edit_album_url %>
+<br>
+<%= link_to "Add track", new_album_track_url(@album) %>
 <br>
 <%= link_to "Back to artist", band_url(@album.band_id) %>
