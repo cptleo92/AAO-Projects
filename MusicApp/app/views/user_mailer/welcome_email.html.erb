@@ -1,0 +1,6 @@
+<h1>Welcome to Music App!</h1>
+
+<p>Thank you for creating an account at Music App!</p>
+<p>In order to continue, you must first activate your account. Please follow the link below and soon you can get started!</p>
+<br>
+<%= link_to "Activate account now!", activate_users_url(activation_token: @user.activation_token) %>

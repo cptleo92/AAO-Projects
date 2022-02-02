@@ -12,9 +12,14 @@ class SessionsController < ApplicationController
     if user.nil?
       flash.now[:errors] = "Wrong credentials"
       render :new
-    else
+    elsif user.activated
       login!(user)
       redirect_to user_url(user)
+    else
+      flash.now[:errors] = "Please activate your account!"
+      msg = UserMailer.activation_email(user)
+      msg.deliver
+      render :new
     end
   end
 

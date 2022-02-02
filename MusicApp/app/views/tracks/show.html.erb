@@ -19,13 +19,18 @@
     </tr>
   </tbody>
 </table>
+
+<% unless @track.lyrics.nil? %>
+  <p>Lyrics</p>
+  <%= ugly_lyrics(@track.lyrics) %>
+<% end %>
 <br>
 <%= render "notes/note", track: @track %>
 <br>
 <%= render "notes/form", track: @track %>
 <br>
 
-<p style="white-space: pre-wrap;"><%= @track.lyrics %></p>
+
 <br>
 <%= link_to "Edit", edit_track_url %>
 <br>
