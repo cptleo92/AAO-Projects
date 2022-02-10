@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RedditClone</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <% if current_user %>
+        <%= link_to 'Profile', user_url(current_user.id) %>
+        <%= link_to 'Log Out', sessions_url, method: :delete %>
+      <% else %>
+        <%= link_to 'Log In', new_sessions_url %>
+        <%= link_to 'Create Account', new_user_url %>
+      <% end %>
+    </header>
+
+    <%= yield %>
+  </body>
+</html>

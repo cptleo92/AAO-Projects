@@ -1,0 +1,21 @@
+<% user_button = (user_action == 'create') ? "Create User" : "Log In" %>  
+<% page_action = (user_action == 'create') ? users_url : sessions_url %>
+
+<%= render 'shared/errors' %>
+
+<form action="<%= page_action %>" method="POST">
+  <input
+      type="hidden"
+      name="authenticity_token"
+      value="<%= form_authenticity_token %>"
+  >
+
+  <label for="username">Username</label>
+  <input type="text" name="user[username]" id="username">
+
+  <label for="pw">Password</label>
+  <input type="password" name="user[password]" id="pw">
+
+  <input type="submit" value="<%= user_button %>">
+</form>
+
