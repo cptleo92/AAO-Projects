@@ -12,7 +12,7 @@
   <body>
     <header>
       <% if current_user %>
-        <%= link_to 'Profile', user_url(current_user.id) %>
+        <%= link_to 'My Profile', user_url(current_user.id) %>
         <%= link_to 'Log Out', sessions_url, method: :delete %>
       <% else %>
         <%= link_to 'Log In', new_sessions_url %>
@@ -21,5 +21,10 @@
     </header>
 
     <%= yield %>
+
+    <footer>
+      <%= link_to 'Home', subs_url %>
+    </footer>
+    
   </body>
 </html>

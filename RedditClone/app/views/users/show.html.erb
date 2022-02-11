@@ -1,3 +1,18 @@
-<h1>Home Page</h1>
+<h1><%= @user.username %>'s Profile</h1>
 
-<p>Welcome, <%= current_user.username %></p>
+<% unless @user.subs.empty? %>
+
+<% end %>
+
+<% if @user.posts.empty? %>
+  <p>No posts... yet!</p>
+<% else %>
+  <ul>
+    <% @user.posts.each do |post| %>
+    <% sub = post.sub %>
+    <li><%= link_to "#{post.title}", post_url(post.id) %> in <%= link_to "#{sub.title}", sub_url(sub.id) %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+

@@ -1,0 +1,13 @@
+<h1>Welcome to Leddit!</h1>
+
+<h3>Sub-leddits</h3>
+<ul>
+  <% @subs.each do |sub| %>
+    <li><%= link_to "#{sub.title.capitalize}", sub_url(sub.id) %></li>
+    <li><%= sub.description %> </li>
+  <% end %>
+</ul>
+
+<br>
+
+<%= link_to 'Create a new sub!', new_sub_url %>

@@ -6,6 +6,14 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6, allow_nil: true }
   before_validation :ensure_session_token
 
+  has_many :posts, 
+    foreign_key: :author_id,
+    dependent: :destroy
+
+  has_many :subs,
+    foreign_key: :moderator_id,
+    dependent: :destroy
+
   def self.find_by_credentials(username, password)
     return nil if User.find_by(username: username).nil?
     user = User.find_by(username: username)

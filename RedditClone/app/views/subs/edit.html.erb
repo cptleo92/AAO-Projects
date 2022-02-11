@@ -1,0 +1,19 @@
+<h1>Edit subleddit: <%= @sub.title %></h1>
+
+<%= render 'shared/errors' %>
+
+<form action="<%= subs_url %>" method="POST">
+  <input type="hidden" name="_method" value="PATCH">
+
+  <%= auth_token %>
+  <label for="title">Title</label>
+  <input type="text" name="sub[title]" id="title" value="<%= @sub.title %>">
+  <br>
+  <label for="description">Description</label>
+  <br>
+  <textarea name="sub[description]" id="description" cols="40" rows="15"><%= @sub.description %></textarea>
+  <br>
+  <input type="submit" value="Edit!">
+</form>
+<br>
+<%= button_to 'Delete Subleddit', sub_url(@sub.id), method: :delete %>
