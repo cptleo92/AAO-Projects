@@ -14,5 +14,16 @@
   <br>
   <textarea name="post[content]" id="content" cols="40" rows="15">What would you like to say today?</textarea>
   <br>
+  <% subs = Sub.all %>
+  <% unless subs.empty? %>
+    <p>Which sub to post to? Must choose at least one!</p>
+    <input type="hidden" name="post[sub_ids][]" value="">
+    <% subs.each do |sub| %>
+      <label><%= sub.title %></label>
+      <input type="checkbox" name="post[sub_ids][]" value="<%= sub.id %>">
+      <br>
+    <% end %>     
+  <% end %>
+
   <input type="submit" value="Create!">
 </form>

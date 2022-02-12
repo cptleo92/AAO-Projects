@@ -8,10 +8,14 @@
   <p>No posts... yet!</p>
 <% else %>
   <ul>
-    <% @user.posts.each do |post| %>
-    <% sub = post.sub %>
-    <li><%= link_to "#{post.title}", post_url(post.id) %> in <%= link_to "#{sub.title}", sub_url(sub.id) %></li>
-    <% end %>
+    <% @user.posts_in_subs.each do |pair| %>
+      <% post, sub = pair[0], pair[1] %>
+      <li>
+        <%= link_to "#{post.title}", post_url(post.id) %> 
+        --
+        <small><%= link_to "#{sub.title}", sub_url(sub.id) %></small>
+      </li>
+    <% end %>    
   </ul>
 <% end %>
 

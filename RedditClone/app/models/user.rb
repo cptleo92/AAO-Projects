@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+
   attr_reader :password
 
   validates :username, presence: true, uniqueness: true
@@ -37,6 +38,17 @@ class User < ApplicationRecord
 
   def is_password?(password)
     BCrypt::Password.new(self.password_hash).is_password?(password)
+  end
+
+  def posts_in_subs
+    post_subs = PostSub.where(post_id: self.post_ids)    
+    post_sub_pair = []
+    post_subs.each do |post_sub|
+      post = Post.find(post_sub.post_id)
+      sub = Sub.find(post_sub.sub_id)
+      post_sub_pair << [post, sub]
+    end    
+    post_sub_pair
   end
 
   private

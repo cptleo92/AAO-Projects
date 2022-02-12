@@ -6,15 +6,24 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-leo = User.create!(username: 'Leo', password: 'password')
-cat = User.create!(username: 'Cat', password: 'password')
-pan = User.create!(username: 'Pan', password: 'password')
+5.times do 
+  User.create!(username: Faker::TvShows::TheExpanse.character, password: 'password')
+end
 
-animals = Sub.create!(title: 'Animals', description: 'Love animals!', moderator_id: leo.id)
-music = Sub.create!(title: 'music', description: 'Love music!', moderator_id: cat.id)
 
-p1 = Post.create!(title:'Hi!', content: 'I love dogs!', sub_id: animals.id, author_id: pan.id)
-p2 = Post.create!(title:'Where do I find a piano?', sub_id: music.id, author_id: cat.id)
-p3 = Post.create!(title:'Baby elephants', url: 'www.babyelephant.com', sub_id: animals.id, author_id: leo.id)
-p4 = Post.create!(title:'Hi!', content: 'I love guitars!', sub_id: music.id, author_id: pan.id)
+4.times do
+  Sub.create!(title: Faker::Appliance.brand, description: Faker::Appliance.equipment, moderator_id: rand(1..5))
+end
+
+
+10.times do 
+  Post.create!(title: Faker::TvShows::TheExpanse.location, content: Faker::TvShows::TheExpanse.quote, author_id: rand(1..5))  
+end
+
+Post.all.each do |post|
+  PostSub.create!(post_id: post.id, sub_id: rand(1..4))
+end
+
+
+
 

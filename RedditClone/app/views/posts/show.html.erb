@@ -1,0 +1,11 @@
+<h1><%= @post.title %></h1>
+
+<p>OP: <%= link_to "#{@post.author.username}", user_url(@post.author.id) %></p>
+<br>
+<% if @post.url %>
+  <%= link_to "#{@post.url}", @post.url %>
+<% end %>
+<br>
+<%= @post.content if @post.content %>
+
+

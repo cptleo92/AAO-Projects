@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :require_logged_in, except: [:show]
   before_action :only_authors, only: [:edit, :update, :destroy]
+  before_action :at_least_one_sub, only: [:create, :update]
 
   def show
     @post = Post.find_by(id: params[:id])
@@ -11,16 +12,17 @@ class PostsController < ApplicationController
     end
   end
 
-  def new
+  def new   
     render :new
   end
 
-  def create
-    @post = Post.new(post_params)
-    if @post.save
+  def create   
+    @post = current_user.posts.new(post_params)       
+    # @post.sub_ids = params[:post][:sub_ids]
+    if @post.save      
       redirect_to post_url(@post.id)
     else
-      flash.now[:errors] = @post.errors.full_messages
+      flash.now[:errors] = @post.errors.full_messages      
       render :new
     end
   end  
@@ -45,12 +47,19 @@ class PostsController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:title, :content, :url, :sub_id, :author_id)
+    params.require(:post).permit(:title, :content, :url, :author_id, sub_ids: [])
   end
 
   def only_authors
     unless params[:post][:author_id] == current_user.id
       render plain: 'nope!', status: :forbidden
+    end
+  end
+
+  def at_least_one_sub
+    if params[:post][:sub_ids] == [""]
+      flash.now[:error] = "Must choose at least 1 sub!" 
+      render :new   
     end
   end
   
