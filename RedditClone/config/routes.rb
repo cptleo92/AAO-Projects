@@ -8,12 +8,22 @@ Rails.application.routes.draw do
 
   resources :subs
 
-  resources :posts, except: :index
+  resources :posts, except: :index do
+    member do
+      get 'upvote'
+      get 'downvote'
+    end
+  end
 
-  resources :comments, only: [:create, :show]
+  resources :comments, only: [:create, :show] do
+    member do
+      get 'upvote'
+      get 'downvote'
+    end
+  end
 
   resources :posts do
-    resources :comments, only: [:new]
+    resources :comments, only: [:new]    
   end
 
 end

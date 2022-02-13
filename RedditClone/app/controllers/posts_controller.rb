@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 
   def show    
     @post = Post.find_by(id: params[:id])
-    @all_comments = @post.comments.includes(:author)
+    @all_comments = @post.comments_by_parent_id
     if @post.nil?
       redirect_to subs_url
     else
@@ -46,6 +46,18 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params[:id])
     @post.destroy
     redirect_to '/'
+  end
+
+  def upvote
+    @post = Post.find_by(id: params[:id])
+    @post.vote(1)
+    redirect_back(fallback_location: '/')
+  end
+
+  def downvote
+    @post = Post.find_by(id: params[:id])
+    @post.vote(-1)
+    redirect_back(fallback_location: '/')
   end
 
   private

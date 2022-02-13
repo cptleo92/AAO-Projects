@@ -13,11 +13,15 @@ module ApplicationHelper
   end
   
   def render_comment(comment)
-    "<li><a href=\"#{comment_url(comment.id)}\">#{comment.content}</a>
+    "<li>
+      (#{comment.score})
+      <a href=\"#{comment_url(comment.id)}\">#{comment.content}</a>
       --
       <small>#{profile(comment.author)}</small>
       --
       <small>#{comment.created_at}</small>
+      --
+      <small><a href=\"#{upvote_comment_url(comment.id)}\">Upvote</a>/<a href=\"#{downvote_comment_url(comment.id)}\">Downvote</a></small>
       </li>
     "
   end
@@ -33,11 +37,13 @@ def generate_children_comments(c1, all_comments)
   # end
   # html.html_safe
 
+  return render_comment(c1).html_safe if all_comments[c1.id].nil? 
+
   html = render_comment(c1)
-  all_comments.each do |c2|
-    if c2.parent_comment_id == c1.id
-      html += "<ul>" + generate_children_comments(c2, all_comments) + "</ul>"
-    end
+  children = all_comments[c1.id]
+  children.each do |c2|       
+    html += "<ul>" + generate_children_comments(c2, all_comments) + "</ul>"  
   end
   html.html_safe
+
 end

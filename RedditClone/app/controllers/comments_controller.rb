@@ -1,4 +1,4 @@
-class CommentsController < ApplicationController
+class CommentsController < ApplicationController 
   before_action :require_logged_in
 
   def show
@@ -20,6 +20,18 @@ class CommentsController < ApplicationController
       flash.now[:errors] = @comment.errors.full_messages
       render :new
     end
+  end
+
+  def upvote
+    @comment = Comment.find_by(id: params[:id])
+    @comment.vote(1)
+    redirect_back(fallback_location: '/')
+  end
+
+  def downvote
+    @comment = Comment.find_by(id: params[:id])
+    @comment.vote(-1)
+    redirect_back(fallback_location: '/')
   end
 
   private

@@ -4,10 +4,16 @@
 <h4>Mods: <%= @sub.moderator.username %></h5>
 
 <% unless @sub.posts.empty? %>
-  <ul>
+  <ul>  
     <% @sub.posts.each do |post| %>
-      <li><%= link_to "#{post.title}", post_url(post.id) %> -- 
-        <%= link_to "#{post.author.username}", user_url(post.author.id) %></li>
+      <li>
+        (<%= post.score %>)
+        <%= link_to "#{post.title}", post_url(post.id) %> -- 
+        <small>
+        <%= link_to "#{post.author.username}", user_url(post.author.id) %> --
+        <%= link_to "Upvote", upvote_post_url(post.id) %>/<%= link_to "Downvote", downvote_post_url(post.id) %>
+        </small>
+      </li>
     <% end %>
   </ul>
 <% end %>
