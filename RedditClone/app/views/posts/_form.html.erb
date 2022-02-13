@@ -1,0 +1,43 @@
+<% action_url = (post.persisted? ? post_url(post.id) : posts_url) %>
+<% submit_text = (post.persisted? ? 'Update!' : 'Create!') %>
+
+<%= render 'shared/errors' %>
+
+<form action="<%= action_url %>" method="POST">
+  <% if post.persisted? %>
+    <input type="hidden" name="_method" value="PATCH">
+  <% end %>
+
+  <%= auth_token %>
+  <label for="title">Title</label>
+  <input type="text" name="post[title]" id="title" value="<%= post.title %>">
+  <br>
+  <label for="url">Link</label>
+  <input type="text" name="post[url]" id="url" value="<%= post.url %>">
+  <br>
+  <label for="content"></label>
+  <br>
+  <textarea name="post[content]" id="content" cols="40" rows="15"><%= post.content %></textarea>
+  <br>
+  <% subs = Sub.all %>
+  <% unless subs.empty? %>
+    <p>Which sub to post to? Must choose at least one!</p>
+    <input type="hidden" name="post[sub_ids][]" value="">
+    <% subs.each do |sub| %>
+      <label><%= sub.title %></label>
+      <input 
+        type="checkbox" 
+        name="post[sub_ids][]" 
+        value="<%= sub.id %>"
+        <%= "checked" if post.subs.include?(sub) %>
+        >
+      <br>
+    <% end %>     
+  <% end %>
+
+  <input type="submit" value="<%= submit_text %>">
+</form>
+
+<% if post.persisted? %>
+  <%= link_to 'Delete Post', post_url(post.id), method: :delete %>
+<% end %>

@@ -1,11 +1,23 @@
 <h1><%= @post.title %></h1>
 
 <p>OP: <%= link_to "#{@post.author.username}", user_url(@post.author.id) %></p>
-<br>
+
 <% if @post.url %>
   <%= link_to "#{@post.url}", @post.url %>
 <% end %>
-<br>
+
 <%= @post.content if @post.content %>
+<br>
+<p>Subs:</p>
+<ul>
+  <% @post.subs.each do |sub| %>
+    <li><%= sub.title %></li>
+  <% end %>
+</ul>
+<br>
+
+<% if current_user == @post.author %>
+  <%= link_to 'Edit Post', edit_post_url(@post.id) %>
+<% end %>
 
 

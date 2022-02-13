@@ -12,7 +12,7 @@ class PostsController < ApplicationController
     end
   end
 
-  def new   
+  def new      
     render :new
   end
 
@@ -22,17 +22,17 @@ class PostsController < ApplicationController
     if @post.save      
       redirect_to post_url(@post.id)
     else
-      flash.now[:errors] = @post.errors.full_messages      
+      flash.now[:errors] = @post.errors.full_messages            
       render :new
     end
   end  
 
-  def edit
+  def edit    
     render :edit
   end
 
   def update
-    @post = Post.find_by(id: params[:id])
+    @post = Post.find(params[:id])
     if @post.update_attributes(post_params)
       redirect_to post_url(@post.id)
     else
@@ -42,7 +42,9 @@ class PostsController < ApplicationController
   end
 
   def destroy
-
+    @post = Post.find_by(id: params[:id])
+    @post.destroy
+    redirect_to '/'
   end
 
   private
@@ -51,15 +53,15 @@ class PostsController < ApplicationController
   end
 
   def only_authors
-    unless params[:post][:author_id] == current_user.id
+    post = Post.find(params[:id])
+    unless post.author == current_user
       render plain: 'nope!', status: :forbidden
     end
   end
 
   def at_least_one_sub
     if params[:post][:sub_ids] == [""]
-      flash.now[:error] = "Must choose at least 1 sub!" 
-      render :new   
+      flash.now[:error] = "Must choose at least 1 sub!"       
     end
   end
   

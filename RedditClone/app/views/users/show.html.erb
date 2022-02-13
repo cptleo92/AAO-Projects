@@ -19,4 +19,14 @@
   </ul>
 <% end %>
 
+<% unless @user.subs.empty? %>
+  <p>Moderator of:</p>
+  <ul>
+    <% @user.subs.each do |sub| %>
+      <li><%= link_to "#{sub.title}", sub_url(sub.id) %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+
 
