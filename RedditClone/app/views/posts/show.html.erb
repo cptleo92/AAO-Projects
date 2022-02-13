@@ -19,7 +19,7 @@
 <% unless top_lvl_comments.empty? %>
   <p>Comments:</p>
   <% top_lvl_comments.each do |top| %>   
-      <ul><%= generate_children_comments(top) %></ul>
+      <ul><%= generate_children_comments(top, @all_comments) %></ul>
     <% end %>
 <% end %>
 <br>

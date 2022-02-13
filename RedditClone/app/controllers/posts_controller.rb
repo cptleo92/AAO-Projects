@@ -3,8 +3,9 @@ class PostsController < ApplicationController
   before_action :only_authors, only: [:edit, :update, :destroy]
   before_action :at_least_one_sub, only: [:create, :update]
 
-  def show
+  def show    
     @post = Post.find_by(id: params[:id])
+    @all_comments = @post.comments.includes(:author)
     if @post.nil?
       redirect_to subs_url
     else
