@@ -1,0 +1,12 @@
+<h1>Write a reply!</h1>
+
+<h4>Original post:</h4>
+<%= @post.content %>
+
+<form action="<%= comments_url %>" method="POST">
+  <%= auth_token %>
+  <input type="hidden" name="comment[post_id]" value="<%= @post.id %>">
+  <textarea name="comment[content]" id="" cols="30" rows="10"></textarea>
+  <br>
+  <input type="submit" value="Add comment">
+</form>

@@ -1,6 +1,12 @@
 <h1><%= @post.title %></h1>
 
 <p>OP: <%= link_to "#{@post.author.username}", user_url(@post.author.id) %></p>
+<p>Subs:</p>
+<ul>
+  <% @post.subs.each do |sub| %>
+    <li><%= sub.title %></li>
+  <% end %>
+</ul>
 
 <% if @post.url %>
   <%= link_to "#{@post.url}", @post.url %>
@@ -8,13 +14,15 @@
 
 <%= @post.content if @post.content %>
 <br>
-<p>Subs:</p>
-<ul>
-  <% @post.subs.each do |sub| %>
-    <li><%= sub.title %></li>
+
+<% unless @post.comments.empty? %>
+  <p>Comments:</p>
+  <% @post.comments.each do |comment| %>
+    <li><%= comment.content %> -- <small><%= profile(comment.author) %></small></li>
   <% end %>
-</ul>
+<% end %>
 <br>
+<%= link_to 'Reply', new_post_comment_url(@post.id) %>
 
 <% if current_user == @post.author %>
   <%= link_to 'Edit Post', edit_post_url(@post.id) %>

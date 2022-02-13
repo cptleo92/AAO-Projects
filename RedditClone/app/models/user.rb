@@ -15,6 +15,10 @@ class User < ApplicationRecord
     foreign_key: :moderator_id,
     dependent: :destroy
 
+  has_many :comments, 
+    foreign_key: :author_id,
+    dependent: :destroy
+
   def self.find_by_credentials(username, password)
     return nil if User.find_by(username: username).nil?
     user = User.find_by(username: username)
