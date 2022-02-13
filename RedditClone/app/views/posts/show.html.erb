@@ -15,11 +15,12 @@
 <%= @post.content if @post.content %>
 <br>
 
-<% unless @post.comments.empty? %>
+<% top_lvl_comments = @post.comments.where(parent_comment_id: nil) %>
+<% unless top_lvl_comments.empty? %>
   <p>Comments:</p>
-  <% @post.comments.each do |comment| %>
-    <li><%= comment.content %> -- <small><%= profile(comment.author) %></small></li>
-  <% end %>
+  <% top_lvl_comments.each do |top| %>   
+      <ul><%= generate_children_comments(top) %></ul>
+    <% end %>
 <% end %>
 <br>
 <%= link_to 'Reply', new_post_comment_url(@post.id) %>

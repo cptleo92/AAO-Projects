@@ -3,6 +3,7 @@
 <h4>Original post:</h4>
 <%= @post.content %>
 
+
 <form action="<%= comments_url %>" method="POST">
   <%= auth_token %>
   <input type="hidden" name="comment[post_id]" value="<%= @post.id %>">

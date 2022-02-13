@@ -1,8 +1,14 @@
 class CommentsController < ApplicationController
   before_action :require_logged_in
 
+  def show
+    @comment = Comment.find_by(id: params[:id])
+    @post = @comment.post
+    render :show
+  end
+
   def new
-    @post = Post.find(params[:post_id])
+    @post = Post.find(params[:post_id])    
     render :new
   end
   
@@ -18,6 +24,6 @@ class CommentsController < ApplicationController
 
   private
   def comment_params
-    params.require(:comment).permit(:content, :author_id, :post_id)
+    params.require(:comment).permit(:content, :author_id, :post_id, :parent_comment_id)
   end
 end

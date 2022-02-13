@@ -1,0 +1,18 @@
+<h1><%= @post.title %></h1>
+
+<p>OP: <%= link_to "#{@post.author.username}", user_url(@post.author.id) %></p>
+
+<strong>Main post:</strong>
+<p><%= @post.content %></p>
+<strong>Comment:</strong>
+<p><%= @comment.content %></p>
+
+
+<form action="<%= comments_url %>" method="POST">
+  <%= auth_token %>
+  <input type="hidden" name="comment[post_id]" value="<%= @post.id %>">
+  <input type="hidden" name="comment[parent_comment_id]" value="<%= @comment.id %>">  
+  <textarea name="comment[content]" id="" cols="30" rows="10"></textarea>
+  <br>
+  <input type="submit" value="Reply to comment">
+</form>
