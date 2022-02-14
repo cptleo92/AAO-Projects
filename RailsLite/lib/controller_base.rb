@@ -8,14 +8,15 @@ class ControllerBase
   attr_reader :req, :res, :params
 
   # Setup the controller
-  def initialize(req, res)
+  def initialize(req, res, route_params)
     @req = req
     @res = res
+    @params = route_params.merge(req.params)
   end
 
   # Helper method to alias @already_built_response
   def already_built_response?
-    !@already_built_response.nil?
+    @already_built_response
   end
 
   # Set the response status code and header
@@ -23,9 +24,9 @@ class ControllerBase
     if already_built_response?
       raise error
     else
-      res.location = url
-      res.status = 302
-      @already_built_response = res
+      @res.location = url
+      @res.status = 302
+      @already_built_response = true
       @session.store_session(res)
     end
   end
@@ -37,10 +38,10 @@ class ControllerBase
     if already_built_response?
       raise error
     else
-      res.content_type = content_type
-      res.write(content)
-      @already_built_response = res
-      @session.store_session(res)
+      @res.content_type = content_type
+      @res.write(content)
+      @already_built_response = true
+      @session.store_session(@res)
     end
   end
 
@@ -61,6 +62,8 @@ class ControllerBase
 
   # use this with the router to call action_name (:index, :show, :create...)
   def invoke_action(name)
+    self.send(name)
+    render name unless already_built_response?
   end
 end
 
