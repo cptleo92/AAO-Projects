@@ -7,32 +7,26 @@
 //   }
 // }
 
-const readline = require('readline');
-const reader = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
+// const readline = require('readline');
+// const reader = readline.createInterface({
+//   input: process.stdin,
+//   output: process.stdout,
+// });
 
 
 class Game {
-  constructor (numRods, numPieces) {
+  constructor (numRods = 3, numPieces = 5) {
     this.rods = Array.from(Array(numRods), () =>  []);
     for (let i = numPieces; i > 0; i--) {
       this.rods[0].push(i);
-    }
+    }  
   }
 
-  run (completionCallback) {
-    this.promptMove();   
+  run (reader, gameCompletionCallback) {
+    this.promptMove(reader, gameCompletionCallback);   
   }
 
-  completionCallback () {
-    this.print();
-    console.log('You win!')
-    reader.close();
-  }
-
-  promptMove () {
+  promptMove (reader, gameCompletionCallback) {
     this.print();
     reader.question('Enter starting rod number: ', (res) => {
       let startTowerIdx = parseInt(res) - 1;
@@ -41,9 +35,10 @@ class Game {
         this.move(startTowerIdx, endTowerIdx);
 
         if (!this.isWon()) {
-          this.run();
+          this.run(reader, gameCompletionCallback);
         } else {
-          this.completionCallback();
+          console.log('You win!');
+          gameCompletionCallback();
         }
       })
     })
@@ -62,7 +57,7 @@ class Game {
 
       endTower.push(startTower.pop());   
     } else {
-      this.invalidMove();
+      console.log('Invalid move!');      
     }
   }
 
@@ -94,11 +89,6 @@ class Game {
     }
   }
 
-  invalidMove () {
-    console.log('Invalid move!');
-    this.promptMove();
-  }
-
   isWon () {
     for(let i = 0; i < this.rods.length - 1; i++) {
       if (this.rods[i].length !== 0) {
@@ -109,6 +99,4 @@ class Game {
   }
 }
 
-const g = new Game(3, 5);
-// g.rods = [[],[2],[1],[5,4,3]];
-g.run();
+module.exports = Game;
