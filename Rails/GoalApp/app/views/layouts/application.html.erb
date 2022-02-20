@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GoalApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <header>
+    <% if current_user %>
+      <p>Currently logged in as: <%= current_user.email %></p>
+      <%= link_to "Log out", sessions_url, method: :delete %>
+    <% else %>
+      <% link_to "Log in", new_sessions_url %>
+    <% end %>
+  </header>
+
+  <body>       
+    <%= yield %>
+  </body>
+</html>
