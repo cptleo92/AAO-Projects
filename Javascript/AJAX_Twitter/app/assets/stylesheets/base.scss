@@ -1,0 +1,191 @@
+body {
+  background-color: lightblue;
+  font-family: sans-serif;
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+  height: 100%;
+}
+
+// body:after {
+//   content: "";
+//   display: table;
+//   clear: both;
+// }
+
+.header {
+  display: flex;
+  background-color: white;   
+  padding: 0;
+  justify-content: space-between;
+  height: 40px;
+}
+
+.header-left {
+  display: flex;  
+  align-items: center;  
+}
+
+.header-right {
+  display: flex;
+  justify-content: end;   
+
+}
+
+.header-right input[type="submit"] {
+  background-color: black;
+  color: white;
+  font-weight: bolder;
+  margin: 0;
+  height: 100%;
+}
+
+.header a {
+  margin: 0;  
+  padding: 12px;  
+}
+
+.header a:hover {
+  background-color:lightcoral;
+}
+
+h1 {
+  font-size: 300%;
+  background-color: white;
+  border-radius: 20px;
+  width: 50%;
+  margin: auto;
+  padding: 10px;
+  text-align: center;
+}
+
+.users-search {  
+  width: 250px;
+  padding-top: 20px;
+  margin: auto;
+}
+
+.users-search input {
+  width: 100%;
+}
+
+.users {
+  padding: 0;
+}
+
+.users > li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.error {
+  color: red;
+  font-size: small;
+}
+
+input[type="submit"] {
+  margin: 5px;
+  padding: 10px;
+}
+
+.tweet-compose {
+  // float: right;
+  width: fit-content;
+  height: fit-content;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+textarea {
+  width: 300px;
+  height: 100px;
+  padding: 10px;
+}
+
+h2 {
+  font-size: 150%; 
+  padding: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid gray;
+}
+
+.tweet-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tweet-bottom p {  
+  padding: 5px 0;
+}
+
+.tweet-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+#feed {
+  // float: left;
+  margin: 0;
+  padding: 0;
+  height: 600px;
+  overflow-y: scroll;
+}
+
+// #feed:after {
+//   content: "";
+//   display: table;
+//   clear: both;
+// }
+
+#feed > li {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  // width: 40%;
+}
+
+.feed-title {
+  text-align: left;
+  font-size: 150%;
+  border-bottom: 1px solid gray;
+}
+
+footer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  margin-top: 20px;
+  border-radius: 5px;
+  position: absolute;
+  width: 80%;
+  bottom: 0;
+}
+
+ul.copy {
+  padding-left: 40px;
+  color: gray;
+  font-size: small;
+}
+
+ul.links {
+  display: flex;
+}
+
+footer a {
+  padding-right: 20px;
+}
+
+footer a:hover {
+  color: darkblue;
+  font-weight: bolder;
+}
+
+main {
+  display: flex;
+  justify-content: space-evenly;
+}
