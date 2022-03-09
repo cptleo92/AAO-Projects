@@ -1,0 +1,119 @@
+h1 {
+  margin: 15px 0;  
+}
+
+#root {
+  display: block;
+  width: fit-content;  
+  margin: auto;  
+}
+
+.clockWidget {
+  width: 350px;
+}
+
+.clock {
+  background: #ffd19c;
+  font-family: 'Merriweather', serif;
+  color: black;
+  width: 450px;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin: auto;
+  padding: 20px;
+}
+
+.line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.tab ul {
+  display: flex;
+  justify-content: space-evenly;  
+  padding: 0;
+  margin: 0;
+}
+
+.tab-name {
+  border: 3px solid black;
+  border-radius: 10px 10px 0 0 ;
+  margin: 0;
+  padding: 10px 17px;
+  font-size: 20px;
+  background-color: rgb(104, 170, 170);
+}
+
+.tab-name.selected {
+  font-weight: bolder;
+  border-bottom: 0;
+}
+
+.tab-name:last-child {
+  border-left: 0;
+}
+
+.tab-name:first-child {
+  border-right: 0;
+}
+
+.tab-name:hover {
+  background-color: black;
+}
+
+article {
+  border: 3px solid black;
+  border-top: 0;
+  background-color: rgb(104, 170, 170);
+  text-align: center;
+  /* height: 200px; */
+  font-size: 20px;
+  font-weight: bolder;
+  padding: 80px 0;
+}
+
+.tab {
+  width: 219px;
+  height: 250px;  
+  color: white;
+  margin-right: 30px;
+}
+
+.tab h1 {
+  color: black;
+}
+
+.weather {
+  width: 450px;
+  background: lightgreen;
+  border: 2px solid black;
+  margin: 15px 0;
+  border-radius: 5px;
+  padding: 10px 20px;
+  text-align: center;
+  font-family: 'Merriweather', serif;
+  font-size: 26px;
+  line-height: .5;
+}
+
+.small-widgets {
+  display: flex;
+}
+
+.auto {
+  width: 219px;
+  height: 320px;  
+  background-color: rgb(219, 96, 219);
+  border: 3px solid black;
+  margin: 0;
+  padding: 10px 17px;
+  font-size: 15px;
+  color: white;
+  font-family: Merriweather;
+}
+
+.auto li {
+  cursor: pointer;
+}
