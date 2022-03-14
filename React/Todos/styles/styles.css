@@ -1,0 +1,143 @@
+body, div, ul, li, p, button, section, label, input, textarea, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  /* border: 1px solid red; */
+
+  font: inherit;
+  font-size: 100%;
+  line-height: 1;
+
+  background: transparent;  
+  list-style: none;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+
+}
+
+h1 {
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  padding: 20px;
+}
+
+h3 {
+  font-size: 25px;
+  border-bottom: 1px solid lightgray;
+  padding: 3px 10px;
+}
+
+h4 {
+  font-size: 20px;
+  padding: 3px 0;
+}
+
+.app-container {
+  width: 600px;
+  margin: auto;
+  padding: 20px;
+  background-color: aliceblue;  
+}
+
+.todo-item {
+  display: flex;
+  /* justify-content: space-between; */
+  /* align-items: center; */
+  flex-direction: column;
+  margin-bottom: 15px;
+  border-bottom: 1px solid gray;
+  padding: 10px;  
+}
+
+.todo-item-main p {
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.todo-item-main, .todo-details-main, .step-list > li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 15px;
+  background-color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+}
+
+.step-list p {
+  padding-left: 5px;
+  font-size: 14px; 
+}
+
+.todo-details {
+  margin: 15px 0 15px 50px;
+  background-color: rgb(231, 244, 255);
+  border-radius: 2px;
+}
+
+.step-list-container {
+  /* border: 5px solid lightblue; */
+  padding: 20px;
+}
+
+.step-list {
+  margin: 10px 20px;
+}
+
+.step-list button {
+  margin-left: 10px;
+}
+
+.step-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 35px;
+}
+
+.form{
+  /* border-top: 1px solid gray; */
+  /* width: 300px; */
+  margin: 200px 30px 30px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.form > *, .step-form > * {
+  padding: 5px 10px;
+}
+
+.form button, .step-form button {
+  width: 100px;
+  margin: 10px;
+}
+
+label {
+  font-weight: 500;
+}
+
+input, textarea {
+  border: 2px solid gray;
+  margin-left: 10px;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+input {
+  width: 200px;
+
+
+}
+
+textarea {  
+  max-width: 250px;;
+  height: 150px;
+}
+
+button {
+  background: lightblue;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
