@@ -9,11 +9,15 @@ class TodoList extends React.Component {
     this.toggleDone = this.toggleDone.bind(this);
   }
 
-  toggleDone(todo) {   
-    return () => this.props.receiveTodo({
-      ...todo,
-      done: !todo.done
-    })
+  componentDidMount() {
+    this.props.fetchTodos();
+  }
+
+  toggleDone(oldTodo) {   
+    return () => {      
+      const todo = { ...oldTodo, done: !oldTodo.done }
+      this.props.updateTodo(todo)
+      }    
   }
 
   render() {
@@ -30,8 +34,10 @@ class TodoList extends React.Component {
               />)
           }
         </ul>
-        <TodoForm 
-          receiveTodo={this.props.receiveTodo}           
+        <TodoForm                 
+          createTodo={this.props.createTodo}
+          errors={this.props.errors}
+          clearErrors={this.props.clearErrors}
         />
       </div>
     )

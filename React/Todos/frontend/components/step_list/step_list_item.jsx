@@ -7,17 +7,20 @@ class StepListItem extends React.Component {
   }
 
   render() {
-    const {removeStep, receiveStep, step} = this.props;
-    const {title, body, todo_id} = step;
+    const {removeStep, updateStep, step} = this.props;
+    const {title, body} = step;
 
     const toggleDone = function() {
-      receiveStep({
+      updateStep({
         ...step,
         done: !step.done
       })
     }
 
     const isDone = step.done ? "Undo" : "Done";
+    const buttonStyle = {
+      backgroundColor: step.done ? "lightgray" : ""
+    }
 
     return (
       <li>        
@@ -26,7 +29,7 @@ class StepListItem extends React.Component {
          <p>{body}</p>
        </div>
        <div className="step-list-item-buttons">
-          <button onClick={toggleDone}>{isDone}</button>
+          <button style={buttonStyle} onClick={toggleDone}>{isDone}</button>
           <button onClick={() => removeStep(step)}>Delete</button>
         </div>
       </li>

@@ -1,5 +1,6 @@
 import React from "react";
 import uniqueId from "../todos/todo_util";
+import ErrorList from "../error_list";
 
 class StepForm extends React.Component {
   constructor(props) {
@@ -31,25 +32,25 @@ class StepForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    let newStep = {
+    let step = {
       ...this.state,
       id: uniqueId()
     }
-
-    this.props.receiveStep(newStep);
-    this.setState(oldState => (
-      {
-        ...oldState,
-        title: "",
-        body: ""
-      })
+    
+    this.props.createStep({step}).then(
+      () => {
+        this.setState({title: "", body: ""})
+        this.props.clearErrors()
+      }
     )
   }
 
   render() {    
+    const hasErrors = this.props.errors.length !== 0;
 
     return (
       <section className="step-form">
+        {hasErrors && <ErrorList errors={this.props.errors} />}
         <label>Title</label>
         <input 
           className="step-form-title" 

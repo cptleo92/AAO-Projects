@@ -52,6 +52,16 @@ h4 {
   padding: 10px;  
 }
 
+.todo-item-main {
+  box-sizing: border-box;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.todo-item-main:hover {
+  border: 1px solid rgb(207, 207, 231);
+}
+
 .todo-item-main p {
   font-weight: 500;
   font-size: 20px;
@@ -63,7 +73,6 @@ h4 {
   align-items: center;
   padding: 5px 15px;
   background-color: rgba(255, 255, 255, 0.8);
-  cursor: pointer;
 }
 
 .step-list p {
@@ -111,6 +120,30 @@ h4 {
 .form button, .step-form button {
   width: 100px;
   margin: 10px;
+}
+
+.form-tag-list {
+  display: flex;
+  justify-content: start; 
+}
+
+.form-tag-list li {
+  background: rgb(138, 228, 228);
+  margin: 10px 5px; 
+  padding: 5px 15px;
+  color: rgb(88, 88, 88);
+  border-radius: 5px; 
+  font-size: 15px;
+}
+
+.form .form-tag-list li:hover {
+  background: rgb(219, 134, 134);
+  cursor: pointer;
+}
+
+.errors {
+  font-size: 12px;
+  color: red;
 }
 
 label {

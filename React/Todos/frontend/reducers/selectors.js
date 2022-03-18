@@ -15,3 +15,7 @@ export const stepsByTodoId = (steps, todoId) => {
   }) 
   return stepsById; 
 }
+
+export const allErrors = (state) => {
+  return Object.values(state.errors)
+}

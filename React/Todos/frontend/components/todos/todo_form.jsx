@@ -1,19 +1,24 @@
 import React from "react";
+import ErrorList from "../error_list"
 import uniqueId from "./todo_util";
+import TagList from "./tag_list"
 
 class TodoForm extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      id: uniqueId(),
       title: "",
       body: "",
-      done: false
+      done: false,
+      tag_names: [],
+      tag_field: ""
     }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.addTag = this.addTag.bind(this);
+    this.removeTag = this.removeTag.bind(this);
   }
 
   handleChange(event) {
@@ -23,6 +28,7 @@ class TodoForm extends React.Component {
         ...prevState,
         title: className === "form-title" ? value : prevState.title,
         body: className === "form-body" ? value : prevState.body,
+        tag_field: className === "form-tags" ? value : prevState.tag_field
       }
     })
   }
@@ -30,25 +36,40 @@ class TodoForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    let newTodo = {
-      ...this.state,
-      id: uniqueId()
-    }
+    let todo = Object.assign({}, this.state)
 
-    this.props.receiveTodo(newTodo);
-    this.setState(oldState => (
-      {
-        ...oldState,
-        title: "",
-        body: ""
-      })
+    this.props.createTodo({todo}).then(
+      () => {
+        this.setState({title: "", body: "", tag_names: []})
+        this.props.clearErrors()
+      }
     )
   }
 
+  removeTag(idx) {    
+    this.setState({
+      tag_names: this.state.tag_names.filter((el, index) => index !== idx)
+    })
+  }
+
+  addTag() {
+    if (this.state.tag_field !== "") {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          tag_names: [...prevState.tag_names, prevState.tag_field],
+          tag_field: ""
+        }
+      })
+    }
+  }
+
   render() {    
+    const hasErrors = this.props.errors.length !== 0;
 
     return (
-      <section className="form">
+      <form className="form" onSubmit={this.handleSubmit}>
+        {hasErrors && <ErrorList errors={this.props.errors} />}
         <label>Title</label>
         <input 
           className="form-title" 
@@ -66,8 +87,25 @@ class TodoForm extends React.Component {
           value={this.state.body}
         />    
 
-        <button onClick={this.handleSubmit}>Add Todo</button>
-      </section>
+        <label>Tags</label>
+        <TagList tags={this.state.tag_names} removeTag={this.removeTag}/>      
+        <div className="tag-input">
+          <input
+            className="form-tags"
+            type="text"
+            placeholder="Enter tags here..."
+            value={this.state.tag_field}
+            onChange={this.handleChange}
+          />
+          <button 
+            type="button" 
+            className="tag-button"            
+            onClick={this.addTag}>
+              Add tag
+          </button>
+        </div>
+        <button>Add Todo</button>
+      </form>
     )
   }
 }

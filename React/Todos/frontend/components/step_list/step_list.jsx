@@ -8,6 +8,10 @@ class StepList extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    this.props.fetchSteps();
+  }
+
   render() {    
     const steps = stepsByTodoId(this.props.steps, this.props.todo_id);
 
@@ -19,7 +23,12 @@ class StepList extends React.Component {
             steps.map((step, idx) => <StepListItemContainer step={step} key={idx}/>)
           }
         </ul>        
-        <StepForm todo_id={this.props.todo_id} receiveStep={this.props.receiveStep}/>
+        <StepForm 
+          todo_id={this.props.todo_id} 
+          errors={this.props.errors}
+          clearErrors={this.props.clearErrors}
+          createStep={this.props.createStep}
+        />
       </div>
     )
   }
