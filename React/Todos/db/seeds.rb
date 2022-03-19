@@ -6,10 +6,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+user1 = User.create!(username: "demo", password: "password")
+user2 = User.create!(username: "todd", password: "password")
 
-todo1 = Todo.create!(title: "Laundry", body: "Wash everything!", done: false)
-todo2 = Todo.create!(title: "Groceries", body: "Eggs, milk, bread", done: false)
-todo3 = Todo.create!(title: "Study", body: "Rails and etc", done: true)
+
+todo1 = Todo.create!(title: "Laundry", body: "Wash everything!", done: false, user_id: user1.id)
+todo2 = Todo.create!(title: "Groceries", body: "Eggs, milk, bread", done: false, user_id: user1.id)
+todo3 = Todo.create!(title: "Study", body: "Rails and etc", done: true, user_id: user2.id)
 
 
 step1 = Step.create!(title: "Washer", body: "2 tide pods", done: false, todo_id: todo1.id)

@@ -30,7 +30,7 @@ class StepListItem extends React.Component {
        </div>
        <div className="step-list-item-buttons">
           <button style={buttonStyle} onClick={toggleDone}>{isDone}</button>
-          <button onClick={() => removeStep(step)}>Delete</button>
+          <button className="button-delete" onClick={() => removeStep(step)}>Delete</button>
         </div>
       </li>
     )

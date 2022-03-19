@@ -1,0 +1,16 @@
+<h1>Create a new account!</h1>
+
+<%= render "shared/errors" %>
+
+<form action="<%= users_url %>" method="POST">
+  <%= auth_token %>
+
+  <label for="username">Username</label>
+  <input type="text" name="user[username]" id="username">
+
+  <label for="password">Password</label>
+  <input type="password" name="user[password]" id="password">
+
+  <input type="submit" value="Create account!">
+    
+</form>

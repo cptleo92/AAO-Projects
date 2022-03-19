@@ -10,6 +10,16 @@
   </head>
 
   <body>
+    <header>
+      Welcome, <%= current_user.username if current_user %>
+      <% if logged_in? %>
+        <%= link_to "Log Out", session_url, method: :delete %>
+      <% else %>
+        <%= link_to "Log In", new_session_url %>
+        <%= link_to 'Create Account', new_user_url %>
+      <% end %>
+      
+      </header>
     <%= yield %>
   </body>
 </html>

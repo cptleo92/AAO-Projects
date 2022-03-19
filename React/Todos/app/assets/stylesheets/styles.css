@@ -159,8 +159,6 @@ input, textarea {
 
 input {
   width: 200px;
-
-
 }
 
 textarea {  
@@ -174,3 +172,16 @@ button {
   border-radius: 5px;
   cursor: pointer;
 }
+
+button:hover {
+  background: rgb(121, 195, 219)
+}
+
+.button-delete {
+  background: rgb(255, 174, 174);
+}
+
+.button-delete:hover {
+  background: rgb(250, 73, 73);
+}
+

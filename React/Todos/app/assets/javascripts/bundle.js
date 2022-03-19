@@ -673,6 +673,7 @@ var StepListItem = /*#__PURE__*/function (_React$Component) {
         style: buttonStyle,
         onClick: toggleDone
       }, isDone), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "button-delete",
         onClick: function onClick() {
           return removeStep(step);
         }
@@ -852,6 +853,7 @@ var TodoDetailView = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "todo-details-main"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, todo.body), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "button-delete",
         onClick: function onClick() {
           return _this.props.removeTodo(todo);
         }
