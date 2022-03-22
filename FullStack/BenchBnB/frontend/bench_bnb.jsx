@@ -5,6 +5,7 @@ import Root from "./components/root"
 
 //TESTING
 import { signup, login, logout } from "./actions/session_actions"
+import { fetchBenches } from "./actions/bench_actions"
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -29,6 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
   window.signup = signup
   window.login = login
   window.logout = logout
+  window.getState = store.getState;
   window.dispatch = store.dispatch;
+  window.fetchBenches = fetchBenches;
 
 })
