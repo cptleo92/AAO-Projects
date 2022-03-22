@@ -1,0 +1,12 @@
+<% if logged_in? %>
+  <p>Logged in as <%= current_user.username %></p>
+  <script type="text/javascript">
+    window.currentUser = <%= render(
+      "api/users/user.json.jbuilder", user: current_user
+    ).html_safe %>
+  </script>
+<% end %>
+
+<main id="root">
+  Why am I here?
+</main>
